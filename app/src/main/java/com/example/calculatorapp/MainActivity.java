@@ -3,20 +3,47 @@ package com.example.calculatorapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView displaytextView;
+    Button zeroButton;
+    Button oneButton ;
+    Button twoButton;
+    Button threeButton ;
+    Button fourButton ;
+    Button fiveButton;
+    Button sixButton ;
+    Button sevenButton ;
+    Button eightButton ;
+    Button nineButton ;
+    Button plusButton;
+    Button minusButton ;
+    Button multiplyButton ;
+    Button divideButton ;
+    Button moduloButton ;
+    Button radicalButton ;
+    Button piButton ;
+    Button dotButton ;
+    Button equalButton ;
+    Button clearButton ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeButtons();
         setContentView(R.layout.activity_main);
+       // buttonsListener(View view);
 
     }
 
     void initializeButtons(){
 
+        TextView displaytextView = findViewById(R.id.firstNumberTextView);
         Button zeroButton = findViewById(R.id.zeroButton);
         Button oneButton = findViewById(R.id.oneButton);
         Button twoButton = findViewById(R.id.twoButton);
@@ -39,5 +66,9 @@ public class MainActivity extends AppCompatActivity {
         Button clearButton = findViewById(R.id.clearButton);
 
     }
+
+   public void buttonsListener(View view){
+
+   }
 
 }
