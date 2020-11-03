@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView operationtextView = findViewById(R.id.operationTextView);
         final TextView firstNumberPlainText = findViewById(R.id.firstNumberPlainText);
         final TextView secondNumberPlainText = findViewById(R.id.secondNumberPlainText);
-        TextView resulttextView = findViewById(R.id.resultTextView);
+        final TextView resulttextView = findViewById(R.id.resultTextView);
         Button zeroButton = findViewById(R.id.zeroButton);
         Button oneButton = findViewById(R.id.oneButton);
         Button twoButton = findViewById(R.id.twoButton);
@@ -46,6 +46,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 operationtextView.setText("*");
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firstNumberPlainText.setText("");
+                secondNumberPlainText.setText("");
+                resulttextView.setText("");
+                operationtextView.setText("");
+            }
+        });
+
+        radicalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String firstStringNumber =  firstNumberPlainText.getText().toString();
+                int firstNumber = Integer.parseInt(firstStringNumber);
+
+                if(firstNumber < 0){
+                    resulttextView.setText("Cannot extract square root from negative numbers");
+                }else{
+                    resulttextView.setText(String.valueOf(Math.sqrt(firstNumber)));
+                }
             }
         });
         minusButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +109,18 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 secondNumberPlainText.setInputType(InputType.TYPE_NULL);
                 return false;
+            }
+        });
+
+        zeroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(firstNumberPlainText.hasFocus()){
+                    firstNumberPlainText.setText("0");
+                }
+                if(secondNumberPlainText.hasFocus()){
+                    secondNumberPlainText.setText("0");
+                }
             }
         });
         oneButton.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +226,44 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        equalButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                String firstStringNumber =  firstNumberPlainText.getText().toString();
+                String secondStringNumber = secondNumberPlainText.getText().toString();
+                String operation =  operationtextView.getText().toString();
+
+
+                int firstNumber = Integer.parseInt(firstStringNumber);
+                int secondNumber = Integer.parseInt(secondStringNumber);
+
+                switch (operation){
+                    case "*":
+                        resulttextView.setText(String.valueOf(firstNumber * secondNumber));
+                        break;
+                    case "/":
+                        if(secondNumber == 0){
+                            resulttextView.setText("Cannot divide by 0");
+                            secondNumberPlainText.setText("");
+                        }else{
+                            resulttextView.setText(String.valueOf((float)firstNumber / (float)secondNumber));
+                        }
+                        break;
+                    case "%" :
+                        resulttextView.setText(String.valueOf(firstNumber % secondNumber));
+                        break;
+                    case "-" :
+                        resulttextView.setText(String.valueOf(firstNumber - secondNumber));
+                        break;
+                    case "+" :
+                        resulttextView.setText(String.valueOf(firstNumber + secondNumber));
+                        break;
+                }
+
+
+            }
+        });
+
     }
-
-
 }
