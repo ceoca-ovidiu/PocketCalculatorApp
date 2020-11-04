@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                                 resultTextView.setText("Cannot divide by 0");
                                 secondNumberPlainText.setText("");
                             } else {
-                                resultTextView.setText(String.valueOf(numberFormat.format((float) firstNumber / (float) secondNumber)));
+                                resultTextView.setText(numberFormat.format((float) firstNumber / (float) secondNumber));
                             }
                             break;
                         case "%":
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                     if (firstNumber < 0) {
                         Toast.makeText(getApplicationContext(), "Cannot extract square root from negative numbers", Toast.LENGTH_SHORT).show();
                     } else {
-                        resultTextView.setText(String.valueOf(numberFormat.format(Math.sqrt(firstNumber))));
+                        resultTextView.setText(numberFormat.format(Math.sqrt(firstNumber)));
                     }
                 }
 
