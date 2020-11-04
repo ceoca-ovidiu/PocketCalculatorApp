@@ -9,19 +9,29 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView firstNumberDisplay;
+    private TextView secondNumberDisplay;
+    private TextView operationDisplay;
+    DecimalFormat numberFormat = new DecimalFormat("#.0000");
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView operationtextView = findViewById(R.id.operationTextView);
+        final TextView operationTextView = findViewById(R.id.operationTextView);
+        final TextView resultTextView = findViewById(R.id.resultTextView);
         final TextView firstNumberPlainText = findViewById(R.id.firstNumberPlainText);
         final TextView secondNumberPlainText = findViewById(R.id.secondNumberPlainText);
-        final TextView resulttextView = findViewById(R.id.resultTextView);
+        firstNumberDisplay = firstNumberPlainText;
+        secondNumberDisplay = secondNumberPlainText;
+        operationDisplay = operationTextView;
         Button zeroButton = findViewById(R.id.zeroButton);
         Button oneButton = findViewById(R.id.oneButton);
         Button twoButton = findViewById(R.id.twoButton);
@@ -45,55 +55,31 @@ public class MainActivity extends AppCompatActivity {
         multiplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operationtextView.setText("*");
-            }
-        });
-
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                firstNumberPlainText.setText("");
-                secondNumberPlainText.setText("");
-                resulttextView.setText("");
-                operationtextView.setText("");
-            }
-        });
-
-        radicalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String firstStringNumber =  firstNumberPlainText.getText().toString();
-                int firstNumber = Integer.parseInt(firstStringNumber);
-
-                if(firstNumber < 0){
-                    resulttextView.setText("Cannot extract square root from negative numbers");
-                }else{
-                    resulttextView.setText(String.valueOf(Math.sqrt(firstNumber)));
-                }
+                setOperationText("*");
             }
         });
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operationtextView.setText("-");
+                setOperationText("-");
             }
         });
         divideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operationtextView.setText("/");
+                setOperationText("/");
             }
         });
         moduloButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operationtextView.setText("%");
+                setOperationText("%");
             }
         });
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operationtextView.setText("+");
+                setOperationText("+");
             }
         });
         firstNumberPlainText.setOnTouchListener(new View.OnTouchListener() {
@@ -115,155 +101,148 @@ public class MainActivity extends AppCompatActivity {
         zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("0");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("0");
-                }
+                display("0");
             }
         });
         oneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("1");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("1");
-                }
-
+                display("1");
             }
         });
         twoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("2");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("2");
-                }
+                display("2");
             }
         });
         threeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("3");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("3");
-                }
+                display("3");
             }
         });
         fourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("4");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("4");
-                }
+                display("4");
             }
         });
         fiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("5");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("5");
-                }
+                display("5");
             }
         });
         sixButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("6");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("6");
-                }
+                display("6");
             }
         });
 
         sevenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("7");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("7");
-                }
+                display("7");
             }
         });
 
         eightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("8");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("8");
-                }
+                display("8");
             }
         });
 
         nineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(firstNumberPlainText.hasFocus()){
-                    firstNumberPlainText.setText("9");
-                }
-                if(secondNumberPlainText.hasFocus()){
-                    secondNumberPlainText.setText("9");
-                }
+                display("9");
             }
         });
         equalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                String firstStringNumber =  firstNumberPlainText.getText().toString();
+                String firstStringNumber = firstNumberPlainText.getText().toString();
                 String secondStringNumber = secondNumberPlainText.getText().toString();
-                String operation =  operationtextView.getText().toString();
+                String operation = operationTextView.getText().toString();
 
-
-                int firstNumber = Integer.parseInt(firstStringNumber);
-                int secondNumber = Integer.parseInt(secondStringNumber);
-
-                switch (operation){
-                    case "*":
-                        resulttextView.setText(String.valueOf(firstNumber * secondNumber));
-                        break;
-                    case "/":
-                        if(secondNumber == 0){
-                            resulttextView.setText("Cannot divide by 0");
-                            secondNumberPlainText.setText("");
-                        }else{
-                            resulttextView.setText(String.valueOf((float)firstNumber / (float)secondNumber));
-                        }
-                        break;
-                    case "%" :
-                        resulttextView.setText(String.valueOf(firstNumber % secondNumber));
-                        break;
-                    case "-" :
-                        resulttextView.setText(String.valueOf(firstNumber - secondNumber));
-                        break;
-                    case "+" :
-                        resulttextView.setText(String.valueOf(firstNumber + secondNumber));
-                        break;
+                if(firstStringNumber.isEmpty() || secondStringNumber.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter a number in both boxes", Toast.LENGTH_SHORT).show();
+                }else if(operation.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter the operation you want to do", Toast.LENGTH_SHORT).show();
+                }else{
+                    int firstNumber = Integer.parseInt(firstStringNumber);
+                    int secondNumber = Integer.parseInt(secondStringNumber);
+                    switch (operation) {
+                        case "*":
+                            resultTextView.setText(String.valueOf(firstNumber * secondNumber));
+                            break;
+                        case "/":
+                            if (secondNumber == 0) {
+                                resultTextView.setText("Cannot divide by 0");
+                                secondNumberPlainText.setText("");
+                            } else {
+                                resultTextView.setText(String.valueOf(numberFormat.format((float) firstNumber / (float) secondNumber)));
+                            }
+                            break;
+                        case "%":
+                            resultTextView.setText(String.valueOf(firstNumber % secondNumber));
+                            break;
+                        case "-":
+                            resultTextView.setText(String.valueOf(firstNumber - secondNumber));
+                            break;
+                        case "+":
+                            resultTextView.setText(String.valueOf(firstNumber + secondNumber));
+                            break;
+                    }
                 }
-
-
             }
         });
 
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firstNumberPlainText.setText("");
+                secondNumberPlainText.setText("");
+                resultTextView.setText("");
+                operationTextView.setText("");
+            }
+        });
+
+        radicalButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                String firstStringNumber = firstNumberPlainText.getText().toString();
+                if(firstStringNumber.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter a number in the first box", Toast.LENGTH_SHORT).show();
+                }else{
+                    int firstNumber = Integer.parseInt(firstStringNumber);
+
+                    if (firstNumber < 0) {
+                        Toast.makeText(getApplicationContext(), "Cannot extract square root from negative numbers", Toast.LENGTH_SHORT).show();
+                    } else {
+                        resultTextView.setText(String.valueOf(numberFormat.format(Math.sqrt(firstNumber))));
+                    }
+                }
+
+            }
+        });
+    }
+
+    void display(String stringDisplay) {
+        if (firstNumberDisplay.hasFocus()) {
+            firstNumberDisplay.setText(stringDisplay);
+        }
+        if (secondNumberDisplay.hasFocus()) {
+            secondNumberDisplay.setText(stringDisplay);
+        }
+    }
+
+    void setOperationText(String stringStter){
+        operationDisplay.setText(stringStter);
     }
 }
