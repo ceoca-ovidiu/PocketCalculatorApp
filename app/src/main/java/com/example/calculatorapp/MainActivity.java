@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView firstNumberDisplay;
     private TextView secondNumberDisplay;
     private TextView operationDisplay;
+    private TextView resultDisplay;
     DecimalFormat numberFormat = new DecimalFormat("#.0000");
 
     @SuppressLint("ClickableViewAccessibility")
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         firstNumberDisplay = firstNumberPlainText;
         secondNumberDisplay = secondNumberPlainText;
         operationDisplay = operationTextView;
+        resultDisplay = resultTextView;
         Button zeroButton = findViewById(R.id.zeroButton);
         Button oneButton = findViewById(R.id.oneButton);
         Button twoButton = findViewById(R.id.twoButton);
@@ -140,65 +142,32 @@ public class MainActivity extends AppCompatActivity {
                 display("6");
             }
         });
-
         sevenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 display("7");
             }
         });
-
         eightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 display("8");
             }
         });
-
         nineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 display("9");
             }
         });
+
         equalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                String firstStringNumber = firstNumberPlainText.getText().toString();
-                String secondStringNumber = secondNumberPlainText.getText().toString();
-                String operation = operationTextView.getText().toString();
 
-                if(firstStringNumber.isEmpty() || secondStringNumber.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter a number in both boxes", Toast.LENGTH_SHORT).show();
-                }else if(operation.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter the operation you want to do", Toast.LENGTH_SHORT).show();
-                }else{
-                    int firstNumber = Integer.parseInt(firstStringNumber);
-                    int secondNumber = Integer.parseInt(secondStringNumber);
-                    switch (operation) {
-                        case "*":
-                            resultTextView.setText(String.valueOf(firstNumber * secondNumber));
-                            break;
-                        case "/":
-                            if (secondNumber == 0) {
-                                resultTextView.setText("Cannot divide by 0");
-                                secondNumberPlainText.setText("");
-                            } else {
-                                resultTextView.setText(numberFormat.format((float) firstNumber / (float) secondNumber));
-                            }
-                            break;
-                        case "%":
-                            resultTextView.setText(String.valueOf(firstNumber % secondNumber));
-                            break;
-                        case "-":
-                            resultTextView.setText(String.valueOf(firstNumber - secondNumber));
-                            break;
-                        case "+":
-                            resultTextView.setText(String.valueOf(firstNumber + secondNumber));
-                            break;
-                    }
-                }
+                Calculate calculate = new Calculate(firstNumberDisplay, secondNumberDisplay,operationDisplay,resultDisplay);
+
             }
         });
 
