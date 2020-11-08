@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/operationTextView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/secondNumberPlainText"
-        app:layout_constraintStart_toEndOf="@+id/firstNumberPlainText"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/zeroButton"
         android:layout_width="70dp"
@@ -300,37 +289,37 @@
         android:id="@+id/resultTextView"
         android:layout_width="117dp"
         android:layout_height="72dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:gravity="center_horizontal"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.799"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/operationTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTextView" />
 
     <EditText
-        android:id="@+id/firstNumberPlainText"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="15dp"
+        android:id="@+id/inputTextView"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/operationTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/secondNumberPlainText"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="50dp"
-        android:ems="10"
+        android:hint="Your Input"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/operationTextView"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    EditText
+    android:id="@+id/inputTextNumber"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="100dp"
+    android:ems="10"
+    android:inputType="number"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.497"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

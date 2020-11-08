@@ -15,10 +15,9 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView firstNumberDisplay;
-    private TextView secondNumberDisplay;
-    private TextView operationDisplay;
+    private TextView inputValue;
     private TextView resultDisplay;
+    private String auxDisplayString;
     DecimalFormat numberFormat = new DecimalFormat("#.0000");
 
     @SuppressLint("ClickableViewAccessibility")
@@ -26,14 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView operationTextView = findViewById(R.id.operationTextView);
-        final TextView resultTextView = findViewById(R.id.resultTextView);
-        final TextView firstNumberPlainText = findViewById(R.id.firstNumberPlainText);
-        final TextView secondNumberPlainText = findViewById(R.id.secondNumberPlainText);
-        firstNumberDisplay = firstNumberPlainText;
-        secondNumberDisplay = secondNumberPlainText;
-        operationDisplay = operationTextView;
-        resultDisplay = resultTextView;
+        inputValue = findViewById(R.id.inputTextView);
+        resultDisplay = findViewById(R.id.resultTextView);
         Button zeroButton = findViewById(R.id.zeroButton);
         Button oneButton = findViewById(R.id.oneButton);
         Button twoButton = findViewById(R.id.twoButton);
@@ -54,52 +47,37 @@ public class MainActivity extends AppCompatActivity {
         Button dotButton = findViewById(R.id.dotButton);
         Button equalButton = findViewById(R.id.equalButton);
         Button clearButton = findViewById(R.id.clearButton);
+        inputValue.setInputType(InputType.TYPE_NULL); // hide soft keyboard
         multiplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperationText("*");
+                display("*");
             }
         });
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperationText("-");
+                display("-");
             }
         });
         divideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperationText("/");
+                display("/");
             }
         });
         moduloButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperationText("%");
+                display("%");
             }
         });
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperationText("+");
+                display("+");
             }
         });
-        firstNumberPlainText.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                firstNumberPlainText.setInputType(InputType.TYPE_NULL);
-                return false;
-            }
-        });
-        secondNumberPlainText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                secondNumberPlainText.setInputType(InputType.TYPE_NULL);
-                return false;
-            }
-        });
-
         zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,28 +138,21 @@ public class MainActivity extends AppCompatActivity {
                 display("9");
             }
         });
-
         equalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onClick(View v) {
-
-                Calculate calculate = new Calculate(firstNumberDisplay, secondNumberDisplay,operationDisplay,resultDisplay);
-
-            }
+            public void onClick(View v) {Calculate calculate = new Calculate(inputValue,resultDisplay);}
         });
-
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstNumberPlainText.setText("");
-                secondNumberPlainText.setText("");
-                resultTextView.setText("");
-                operationTextView.setText("");
+                inputValue.setText("");
+                resultDisplay.setText("");
+                auxDisplayString = null;
             }
         });
 
-        radicalButton.setOnClickListener(new View.OnClickListener() {
+/*        radicalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
@@ -199,19 +170,30 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
 
     void display(String stringDisplay) {
-        if (firstNumberDisplay.hasFocus()) {
-            firstNumberDisplay.setText(stringDisplay);
-        }
-        if (secondNumberDisplay.hasFocus()) {
-            secondNumberDisplay.setText(stringDisplay);
-        }
-    }
 
-    void setOperationText(String stringStter){
-        operationDisplay.setText(stringStter);
+        if(auxDisplayString == null){
+            if(stringDisplay.equals("*") || stringDisplay.equals("/") || stringDisplay.equals("%")){
+                Toast.makeText(getApplicationContext(), "Please enter a number first", Toast.LENGTH_SHORT).show();
+            }else{
+                auxDisplayString = stringDisplay;
+                inputValue.setText(auxDisplayString);
+            }
+        }else{
+            if(stringDisplay.equals("-") || stringDisplay.equals("+") || stringDisplay.equals("/") || stringDisplay.equals("*") || stringDisplay.equals("%")){
+                if(auxDisplayString.endsWith("-") || auxDisplayString.endsWith("+") || auxDisplayString.endsWith("/") || auxDisplayString.endsWith("*") || auxDisplayString.endsWith("%") ){
+                    Toast.makeText(getApplicationContext(), "Cannot duplicate an operation", Toast.LENGTH_SHORT).show();
+                }else{
+                    auxDisplayString = auxDisplayString + stringDisplay;
+                    inputValue.setText(auxDisplayString);
+                }
+            }else{
+                auxDisplayString = auxDisplayString + stringDisplay;
+                inputValue.setText(auxDisplayString);
+            }
+        }
     }
 }

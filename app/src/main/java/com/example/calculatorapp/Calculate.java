@@ -12,43 +12,38 @@ public class Calculate {
     private Multiplication multiplication;
     private Division division;
     private Modulo modulo;
-    private TextView firstNumberDisplay;
-    private TextView secondNumberDisplay;
-    private TextView operationDisplay;
     private TextView resultDisplay;
-    private String operationString;
-    private String firstStringNumber;
-    private String secondStringNumber;
+    private TextView inputValue;
+    private String inputStringValue;
     private int firstNumber;
     private int secondNumber;
     private int result;
     DecimalFormat numberFormat = new DecimalFormat("#.0000");
 
-    public Calculate(TextView firstNumberDisplay, TextView secondNumberDisplay, TextView operationDisplay, TextView resultDisplay) {
-        this.firstNumberDisplay = firstNumberDisplay;
-        this.secondNumberDisplay = secondNumberDisplay;
-        this.operationDisplay = operationDisplay;
+    public Calculate(TextView inputValue, TextView resultDisplay) {
+        this.inputValue = inputValue;
         this.resultDisplay = resultDisplay;
-        intializeParameters();
+        intializeStringParameters();
         makeCalculations();
     }
 
-    private void intializeParameters (){
+    private void intializeStringParameters(){
 
-         firstStringNumber = firstNumberDisplay.getText().toString();
-         secondStringNumber = secondNumberDisplay.getText().toString();
-         operationString = operationDisplay.getText().toString();
+        inputStringValue = inputValue.getText().toString();
+
+    }
+
+    private void verifyStingEmptiness(){
+
+        if(inputStringValue.isEmpty()){
+            Toast.makeText(new MainActivity(), "Please enter something ", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     private void makeCalculations(){
 
-        if(firstStringNumber.isEmpty() || secondStringNumber.isEmpty()){
-            Toast.makeText(new MainActivity(), "Please enter a number in both boxes", Toast.LENGTH_SHORT).show();
-        }else if (operationString.isEmpty()){
-            Toast.makeText(new MainActivity(), "Please enter the operation you want to do", Toast.LENGTH_SHORT).show();
-        }else{
-            int firstNumber = Integer.parseInt(firstStringNumber);
+            /*int firstNumber = Integer.parseInt(firstStringNumber);
             int secondNumber = Integer.parseInt(secondStringNumber);
             switch (operationString) {
                 case "*":
@@ -71,7 +66,9 @@ public class Calculate {
                 case "+":
                     resultDisplay.setText(String.valueOf(firstNumber + secondNumber));
                     break;
-            }
+                default :
+
+            }*/
         }
     }
-}
+
