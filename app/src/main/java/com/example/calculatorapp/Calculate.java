@@ -4,10 +4,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Calculate {
 
-    private Addition addition;
     private Substraction substraction;
     private Multiplication multiplication;
     private Division division;
@@ -15,6 +16,9 @@ public class Calculate {
     private TextView resultDisplay;
     private TextView inputValue;
     private String inputStringValue;
+    private List<String> inputStringList = new ArrayList<>();
+    private List<Integer> inputIntegersList = new ArrayList<>();
+    private List<Character> inputCharOperations = new ArrayList<>();
     private int firstNumber;
     private int secondNumber;
     private int result;
@@ -24,7 +28,32 @@ public class Calculate {
         this.inputValue = inputValue;
         this.resultDisplay = resultDisplay;
         intializeStringParameters();
+        verifyStingEmptiness();
+        inputToLists();
         makeCalculations();
+        display();
+    }
+
+    private void display() {
+
+        resultDisplay.setText(result);
+
+    }
+
+    private void inputToLists() {
+        for(int i =0 ; i < inputStringValue.length() ; i++){
+            if(inputStringValue.charAt(i) == '*' ||
+                    inputStringValue.charAt(i) == '/' ||
+                    inputStringValue.charAt(i) == '+' ||
+                    inputStringValue.charAt(i) == '-' ||
+                    inputStringValue.charAt(i) == '%'){
+
+                inputCharOperations.add(inputStringValue.charAt(i));
+
+            }else{
+                inputIntegersList.add(Integer.parseInt(String.valueOf(inputStringValue.charAt(i))));
+            }
+        }
     }
 
     private void intializeStringParameters(){
@@ -41,9 +70,29 @@ public class Calculate {
 
     }
 
-    private void makeCalculations(){
+    private void makeCalculations(){ // TODO : here it crashes
 
-            /*int firstNumber = Integer.parseInt(firstStringNumber);
+        result = inputIntegersList.get(0);
+        inputIntegersList.remove(0);
+
+        for(Character character : inputCharOperations){
+
+            if(character == '+'){
+                Addition addition = new Addition(result,inputIntegersList.get(0));
+                result = addition.add();
+                inputIntegersList.remove(0);
+            }
+            if(character == '-'){
+                Substraction substraction = new Substraction(result, inputIntegersList.get(0));
+                result = substraction.substract();
+                inputIntegersList.remove(0);
+            }
+        }
+        }
+    }
+
+
+    /*int firstNumber = Integer.parseInt(firstStringNumber);
             int secondNumber = Integer.parseInt(secondStringNumber);
             switch (operationString) {
                 case "*":
@@ -69,6 +118,3 @@ public class Calculate {
                 default :
 
             }*/
-        }
-    }
-
