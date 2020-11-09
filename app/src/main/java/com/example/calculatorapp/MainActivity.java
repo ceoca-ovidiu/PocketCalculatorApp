@@ -141,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
         equalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onClick(View v) {Calculate calculate = new Calculate(inputValue,resultDisplay);}
+            public void onClick(View v) {
+                Calculate calculate = new Calculate(inputValue,resultDisplay);
+            }
         });
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override

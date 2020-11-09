@@ -9,20 +9,14 @@ import java.util.List;
 
 public class Calculate {
 
-    private Substraction substraction;
-    private Multiplication multiplication;
-    private Division division;
-    private Modulo modulo;
+    DecimalFormat numberFormat = new DecimalFormat("#.0000");
     private TextView resultDisplay;
     private TextView inputValue;
     private String inputStringValue;
     private List<String> inputStringList = new ArrayList<>();
     private List<Integer> inputIntegersList = new ArrayList<>();
     private List<Character> inputCharOperations = new ArrayList<>();
-    private int firstNumber;
-    private int secondNumber;
     private int result;
-    DecimalFormat numberFormat = new DecimalFormat("#.0000");
 
     public Calculate(TextView inputValue, TextView resultDisplay) {
         this.inputValue = inputValue;
@@ -36,60 +30,93 @@ public class Calculate {
 
     private void display() {
 
-        resultDisplay.setText(result);
+        resultDisplay.setText(String.valueOf(result));
 
     }
 
     private void inputToLists() {
-        for(int i =0 ; i < inputStringValue.length() ; i++){
-            if(inputStringValue.charAt(i) == '*' ||
+        for (int i = 0; i < inputStringValue.length(); i++) {
+            if (inputStringValue.charAt(i) == '*' ||
                     inputStringValue.charAt(i) == '/' ||
                     inputStringValue.charAt(i) == '+' ||
                     inputStringValue.charAt(i) == '-' ||
-                    inputStringValue.charAt(i) == '%'){
+                    inputStringValue.charAt(i) == '%') {
 
                 inputCharOperations.add(inputStringValue.charAt(i));
 
-            }else{
+            } else {
                 inputIntegersList.add(Integer.parseInt(String.valueOf(inputStringValue.charAt(i))));
             }
         }
     }
 
-    private void intializeStringParameters(){
+    private void intializeStringParameters() {
 
         inputStringValue = inputValue.getText().toString();
 
     }
 
-    private void verifyStingEmptiness(){
+    private void verifyStingEmptiness() {
 
-        if(inputStringValue.isEmpty()){
-            Toast.makeText(new MainActivity(), "Please enter something ", Toast.LENGTH_SHORT).show();
+        if (inputStringValue.isEmpty()) {
+            resultDisplay.setText("Empty field");
         }
 
     }
 
-    private void makeCalculations(){ // TODO : here it crashes
+    private void makeCalculations() {
 
-        result = inputIntegersList.get(0);
+        result = 0 ;
+
+        while(inputCharOperations.contains('*')){
+
+            int index = inputCharOperations.indexOf('*');
+            result = result + inputIntegersList.get(index) * inputIntegersList.get(index + 1);
+            inputIntegersList.remove(index + 1);
+            inputIntegersList.remove(index);
+            inputCharOperations.remove(index);
+
+        }
+
+        result = result + inputIntegersList.get(0);
         inputIntegersList.remove(0);
 
-        for(Character character : inputCharOperations){
+        if(inputIntegersList.isEmpty()){
+            return;
+        }else{
+            for (Character character : inputCharOperations) {
 
-            if(character == '+'){
-                Addition addition = new Addition(result,inputIntegersList.get(0));
-                result = addition.add();
-                inputIntegersList.remove(0);
-            }
-            if(character == '-'){
-                Substraction substraction = new Substraction(result, inputIntegersList.get(0));
-                result = substraction.substract();
-                inputIntegersList.remove(0);
+                if (character == '+') {
+                    Addition addition = new Addition(result, inputIntegersList.get(0));
+                    result = addition.add();
+                    inputIntegersList.remove(0);
+                }
+                if (character == '-') {
+                    Substraction substraction = new Substraction(result, inputIntegersList.get(0));
+                    result = substraction.substract();
+                    inputIntegersList.remove(0);
+                }
+                if (character == '*') {
+                    Multiplication multiplication = new Multiplication(result, inputIntegersList.get(0));
+                    result = multiplication.multiply();
+                    inputIntegersList.remove(0);
+                }
+                if (character == '/') {
+                    Division division = new Division(result, inputIntegersList.get(0));
+                    result = division.divide();
+                    inputIntegersList.remove(0);
+                }
+                if (character == '%') {
+                    Modulo modulo = new Modulo(result, inputIntegersList.get(0));
+                    result = modulo.modul();
+                    inputIntegersList.remove(0);
+                }
             }
         }
-        }
+
+
     }
+}
 
 
     /*int firstNumber = Integer.parseInt(firstStringNumber);
