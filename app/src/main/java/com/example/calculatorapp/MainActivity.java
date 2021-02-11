@@ -186,7 +186,13 @@ public class MainActivity extends AppCompatActivity {
                         resultDisplay.setText(numberFormat.format(Math.sqrt(firstNumber)));
                     }
                 }
+            }
+        });
 
+        piButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                display("PI");
             }
         });
     }

@@ -2,15 +2,15 @@ package com.example.calculatorapp;
 
 public class Modulo {
 
-    private int firstNumber;
-    private int secondNumber;
+    private double firstNumber;
+    private double secondNumber;
 
-    public Modulo(int firstNumber, int secondNumber) {
+    public Modulo(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
     }
 
-    public int modul(){
+    public double modul(){
         return firstNumber % secondNumber;
     }
 

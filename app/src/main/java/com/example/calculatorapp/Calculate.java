@@ -1,6 +1,5 @@
 package com.example.calculatorapp;
 
-import android.annotation.SuppressLint;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -15,7 +14,9 @@ public class Calculate {
     private String inputStringValueOne;
     private String inputStringValueTwo;
     private String inputStringValueSign;
-    private int result = 0;
+    private double result = 0;
+    private double inputDoubleValueOne;
+    private double inputDoubleValueTwo;
 
     public Calculate(TextView inputValueOne, TextView inputValueTwo, TextView inputValueSign, TextView resultDisplay) {
         this.inputValueOne = inputValueOne;
@@ -23,12 +24,13 @@ public class Calculate {
         this.inputValueSign = inputValueSign;
         this.resultDisplay = resultDisplay;
         intializeStringParameters();
+        convertStringToDouble();
         makeCalculations();
         display();
     }
 
     private void display() {
-        resultDisplay.setText(String.valueOf(numberFormat.format(result)));
+        resultDisplay.setText(numberFormat.format(result));
     }
 
     private void intializeStringParameters() {
@@ -37,25 +39,41 @@ public class Calculate {
         inputStringValueSign = inputValueSign.getText().toString();
     }
 
+    private void convertStringToDouble(){
+
+        try {
+            inputDoubleValueOne = Double.parseDouble(inputStringValueOne);
+        }catch (Exception e){
+            inputDoubleValueOne = 3.1415;
+        }
+
+        try {
+            inputDoubleValueTwo = Double.parseDouble(inputStringValueTwo);
+        }catch (Exception e){
+            inputDoubleValueTwo = 3.1415;
+        }
+
+    }
+
     private void makeCalculations() {
         if (inputStringValueSign.equals(Character.toString('*'))) {
-            Multiplication multiplication = new Multiplication(Integer.parseInt(inputStringValueOne), Integer.parseInt(inputStringValueTwo));
+            Multiplication multiplication = new Multiplication(inputDoubleValueOne,inputDoubleValueTwo);
             result = multiplication.multiply();
         }
         if (inputStringValueSign.equals(Character.toString('+'))) {
-            Addition addition = new Addition(Integer.parseInt(inputStringValueOne), Integer.parseInt(inputStringValueTwo));
+            Addition addition = new Addition(inputDoubleValueOne,inputDoubleValueTwo);
             result = addition.add();
         }
         if (inputStringValueSign.equals(Character.toString('-'))) {
-            Substraction substraction = new Substraction(Integer.parseInt(inputStringValueOne), Integer.parseInt(inputStringValueTwo));
+            Substraction substraction = new Substraction(inputDoubleValueOne,inputDoubleValueTwo);
             result = substraction.substract();
         }
         if (inputStringValueSign.equals(Character.toString('/'))) {
-            Division division = new Division(Integer.parseInt(inputStringValueOne), Integer.parseInt(inputStringValueTwo));
+            Division division = new Division(inputDoubleValueOne,inputDoubleValueTwo);
             result = division.divide();
         }
         if (inputStringValueSign.equals(Character.toString('%'))) {
-            Modulo modulo = new Modulo(Integer.parseInt(inputStringValueOne), Integer.parseInt(inputStringValueTwo));
+            Modulo modulo = new Modulo(inputDoubleValueOne,inputDoubleValueTwo);
             result = modulo.modul();
         }
     }

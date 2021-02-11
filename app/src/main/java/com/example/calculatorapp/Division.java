@@ -2,15 +2,15 @@ package com.example.calculatorapp;
 
 public class Division {
 
-    private int firstNumber;
-    private int secondNumber;
+    private double firstNumber;
+    private double secondNumber;
 
-    public Division(int firstNumber, int secondNumber) {
+    public Division(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
     }
 
-    public int divide(){
+    public double divide(){
         return firstNumber / secondNumber;
     }
 

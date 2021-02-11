@@ -2,15 +2,15 @@ package com.example.calculatorapp;
 
 public class Addition {
 
-    private int firstNumber;
-    private int secondNumber;
+    private double firstNumber;
+    private double secondNumber;
 
-    public Addition(int firstNumber, int secondNumber) {
+    public Addition(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
     }
 
-    public int add(){
+    public double add(){
         return firstNumber + secondNumber;
     }
 }

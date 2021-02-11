@@ -2,15 +2,15 @@ package com.example.calculatorapp;
 
 public class Multiplication {
 
-    private int firstNumber;
-    private int secondNumber;
+    private double firstNumber;
+    private double secondNumber;
 
-    public Multiplication(int firstNumber, int secondNumber) {
+    public Multiplication(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
     }
 
-    public int multiply(){
+    public double multiply(){
         return firstNumber * secondNumber;
     }
 

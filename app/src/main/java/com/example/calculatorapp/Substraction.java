@@ -2,15 +2,15 @@ package com.example.calculatorapp;
 
 public class Substraction {
 
-    private int firstNumber;
-    private int secondNumber;
+    private double firstNumber;
+    private double secondNumber;
 
-    public Substraction(int firstNumber, int secondNumber) {
+    public Substraction(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
     }
 
-    public int substract(){
+    public double substract(){
         return firstNumber - secondNumber;
     }
 
