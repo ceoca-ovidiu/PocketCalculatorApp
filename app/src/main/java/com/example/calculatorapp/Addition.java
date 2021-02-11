@@ -2,8 +2,8 @@ package com.example.calculatorapp;
 
 public class Addition {
 
-    private double firstNumber;
-    private double secondNumber;
+    private final double firstNumber;
+    private final double secondNumber;
 
     public Addition(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;

@@ -15,8 +15,8 @@ public class Calculate {
     private String inputStringValueTwo;
     private String inputStringValueSign;
     private double result = 0;
-    private double inputDoubleValueOne;
-    private double inputDoubleValueTwo;
+    private final double inputDoubleValueOne;
+    private final double inputDoubleValueTwo;
 
     public Calculate(TextView inputValueOne, TextView inputValueTwo, TextView inputValueSign, TextView resultDisplay) {
         this.inputValueOne = inputValueOne;

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -195,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String inputStringValueOne = inputValueOne.getText().toString();
                 if (inputStringValueOne.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please enter a number in the first box", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
                 } else {
                     int firstNumber = Integer.parseInt(inputStringValueOne);
 

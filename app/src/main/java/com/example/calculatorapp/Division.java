@@ -2,8 +2,8 @@ package com.example.calculatorapp;
 
 public class Division {
 
-    private double firstNumber;
-    private double secondNumber;
+    private final double firstNumber;
+    private final double secondNumber;
 
     public Division(double firstNumber, double secondNumber) {
         this.firstNumber = firstNumber;
