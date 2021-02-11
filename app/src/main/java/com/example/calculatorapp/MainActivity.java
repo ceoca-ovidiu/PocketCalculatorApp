@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (inputValueOperation.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Insert operation", Toast.LENGTH_SHORT).show();
                 } else if (inputValueOne.getText().toString().equals(".") || inputValueTwo.getText().toString().equals(".")){
-                    Toast.makeText(getApplicationContext(), "What should I do with two dots ?", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter valid numbers", Toast.LENGTH_SHORT).show();
                 }else {
                     new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
                 }
