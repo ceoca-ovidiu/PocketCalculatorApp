@@ -11,7 +11,7 @@ public class Calculate {
     private final TextView inputValueOne;
     private final TextView inputValueTwo;
     private final TextView inputValueSign;
-    DecimalFormat numberFormat = new DecimalFormat("#.0000");
+    DecimalFormat numberFormat = new DecimalFormat("#.000");
     private String inputStringValueOne;
     private String inputStringValueTwo;
     private String inputStringValueSign;
@@ -28,7 +28,7 @@ public class Calculate {
     }
 
     private void display() {
-        resultDisplay.setText(String.valueOf(result));
+        resultDisplay.setText(String.valueOf(numberFormat.format(result)));
     }
 
     private void intializeStringParameters() {

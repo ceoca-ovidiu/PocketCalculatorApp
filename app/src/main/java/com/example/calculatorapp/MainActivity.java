@@ -1,7 +1,5 @@
 package com.example.calculatorapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,11 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    DecimalFormat numberFormat = new DecimalFormat("#.0000");
+    DecimalFormat numberFormat = new DecimalFormat("#.000");
     private TextView inputValueOne;
     private TextView inputValueTwo;
     private TextView inputValueOperation;
@@ -64,17 +64,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 display("-");
-/*                if (resultDisplay.getText().toString().isEmpty()) {
-                    result = Integer.parseInt(inputValue.getText().toString());
-                    resultDisplay.setText(String.valueOf(result));
-                    inputValue.setText("");
-                    auxDisplayString = null;
-                } else {
-                    result = result - Integer.parseInt(inputValue.getText().toString());
-                    resultDisplay.setText(String.valueOf(result));
-                    inputValue.setText("");
-                    auxDisplayString = null;
-                }*/
             }
         });
         divideButton.setOnClickListener(new View.OnClickListener() {
@@ -92,18 +81,7 @@ public class MainActivity extends AppCompatActivity {
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 display("+");
-              /*  if (resultDisplay.getText().toString().isEmpty()) {
-                    result = Integer.parseInt(inputValue.getText().toString());
-                    resultDisplay.setText(String.valueOf(result));
-                    inputValue.setText("");
-                    auxDisplayString = null;
-                } else {
-                    result = result + Integer.parseInt(inputValue.getText().toString());
-                    resultDisplay.setText(String.valueOf(result));
-                    inputValue.setText("");
-                    auxDisplayString = null;
-                }*/
+                display("+");
             }
         });
         zeroButton.setOnClickListener(new View.OnClickListener() {
@@ -170,13 +148,13 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if(inputValueOne.getText().toString().isEmpty()){
-                    Toast.makeText(MainActivity.this, "Insert first value" , Toast.LENGTH_SHORT).show();
-                }else if(inputValueTwo.getText().toString().isEmpty()){
-                    Toast.makeText(MainActivity.this,"Insert second value" , Toast.LENGTH_SHORT).show();
-                }else if (inputValueOperation.getText().toString().isEmpty()){
-                    Toast.makeText(MainActivity.this,"Insert operation", Toast.LENGTH_SHORT).show();
-                }else{
+                if (inputValueOne.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Insert first value", Toast.LENGTH_SHORT).show();
+                } else if (inputValueTwo.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Insert second value", Toast.LENGTH_SHORT).show();
+                } else if (inputValueOperation.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Insert operation", Toast.LENGTH_SHORT).show();
+                } else {
                     Calculate calculate = new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
                 }
             }
@@ -192,34 +170,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-/*        radicalButton.setOnClickListener(new View.OnClickListener() {
+        radicalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                String firstStringNumber = firstNumberPlainText.getText().toString();
-                if(firstStringNumber.isEmpty()){
+                String inputStringValueOne = inputValueOne.getText().toString();
+                if (inputStringValueOne.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please enter a number in the first box", Toast.LENGTH_SHORT).show();
-                }else{
-                    int firstNumber = Integer.parseInt(firstStringNumber);
+                } else {
+                    int firstNumber = Integer.parseInt(inputStringValueOne);
 
                     if (firstNumber < 0) {
                         Toast.makeText(getApplicationContext(), "Cannot extract square root from negative numbers", Toast.LENGTH_SHORT).show();
                     } else {
-                        resultTextView.setText(numberFormat.format(Math.sqrt(firstNumber)));
+                        resultDisplay.setText(numberFormat.format(Math.sqrt(firstNumber)));
                     }
                 }
 
             }
-        });*/
+        });
     }
 
     void display(String stringDisplay) {
 
-        if(stringDisplay == "*" || stringDisplay == "+" || stringDisplay == "-" || stringDisplay == "/" || stringDisplay == "%"){
+        if (stringDisplay == "*" || stringDisplay == "+" || stringDisplay == "-" || stringDisplay == "/" || stringDisplay == "%") {
             inputValueOperation.setText(stringDisplay);
-        }else if(inputValueOne.getText().toString().isEmpty()){
+        } else if (inputValueOne.getText().toString().isEmpty()) {
             inputValueOne.setText(stringDisplay);
-        }else{
+        } else {
             inputValueTwo.setText(stringDisplay);
         }
 
