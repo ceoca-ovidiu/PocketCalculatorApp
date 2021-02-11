@@ -24,7 +24,8 @@ public class Calculate {
         this.inputValueSign = inputValueSign;
         this.resultDisplay = resultDisplay;
         intializeStringParameters();
-        convertStringToDouble();
+        inputDoubleValueOne = convertStringToDouble(inputStringValueOne);
+        inputDoubleValueTwo = convertStringToDouble(inputStringValueTwo);
         makeCalculations();
         display();
     }
@@ -39,20 +40,12 @@ public class Calculate {
         inputStringValueSign = inputValueSign.getText().toString();
     }
 
-    private void convertStringToDouble(){
-
+    private double convertStringToDouble(String value){
         try {
-            inputDoubleValueOne = Double.parseDouble(inputStringValueOne);
+            return Double.parseDouble(value);
         }catch (Exception e){
-            inputDoubleValueOne = 3.1415;
+            return 3.1415;
         }
-
-        try {
-            inputDoubleValueTwo = Double.parseDouble(inputStringValueTwo);
-        }catch (Exception e){
-            inputDoubleValueTwo = 3.1415;
-        }
-
     }
 
     private void makeCalculations() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView inputValueTwo;
     private TextView inputValueOperation;
     private TextView resultDisplay;
-    private String auxDisplayString;
-    private int result;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // buttons and textViews identifications
+
         inputValueOne = findViewById(R.id.inputOneTextView);
         inputValueTwo = findViewById(R.id.inputTwoTextView);
         inputValueOperation = findViewById(R.id.signTextView);
@@ -51,39 +53,24 @@ public class MainActivity extends AppCompatActivity {
         Button dotButton = findViewById(R.id.dotButton);
         Button equalButton = findViewById(R.id.equalButton);
         Button clearButton = findViewById(R.id.clearButton);
-        inputValueOne.setInputType(InputType.TYPE_NULL); // hide soft keyboard
-        inputValueTwo.setInputType(InputType.TYPE_NULL); // hide soft keyboard
-        inputValueOperation.setInputType(InputType.TYPE_NULL); // hide soft keyboard
-        multiplyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display("*");
-            }
-        });
-        minusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display("-");
-            }
-        });
-        divideButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display("/");
-            }
-        });
-        moduloButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display("%");
-            }
-        });
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display("+");
-            }
-        });
+
+        // set focus on start
+
+        setFocus(inputValueOne);
+
+        // Make the text selectable for the first and the second fields
+
+        inputValueOne.setTextIsSelectable(true);
+        inputValueTwo.setTextIsSelectable(true);
+
+        // hide the basic keyboard
+
+        inputValueOne.setInputType(InputType.TYPE_NULL);
+        inputValueTwo.setInputType(InputType.TYPE_NULL);
+        inputValueOperation.setInputType(InputType.TYPE_NULL);
+
+        // OnClick Listeners (0-9)
+
         zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +131,39 @@ public class MainActivity extends AppCompatActivity {
                 display("9");
             }
         });
+
+        // OnClick Listeners (Operations)
+
+        multiplyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOperation("*");
+            }
+        });
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOperation("-");
+            }
+        });
+        divideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOperation("/");
+            }
+        });
+        moduloButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOperation("%");
+            }
+        });
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayOperation("+");
+            }
+        });
         equalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -155,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (inputValueOperation.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Insert operation", Toast.LENGTH_SHORT).show();
                 } else {
-                    Calculate calculate = new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
+                    new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
                 }
             }
         });
@@ -166,10 +186,9 @@ public class MainActivity extends AppCompatActivity {
                 inputValueTwo.setText("");
                 inputValueOperation.setText("");
                 resultDisplay.setText("");
-                auxDisplayString = null;
+                setFocus(inputValueOne);
             }
         });
-
         radicalButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -188,24 +207,45 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         piButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                display("PI");
+                TextView textView = (TextView) getCurrentFocus();
+                if(textView.getText().toString().isEmpty()){
+                    display("PI");
+                }else{
+                    Toast.makeText(getApplicationContext(), "Already a number in the field", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        dotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textView = (TextView) getCurrentFocus();
+                String auxString = textView.getText().toString();
+                if(auxString.contains(".")){
+                    Toast.makeText(getApplicationContext(), "Already a point in the field", Toast.LENGTH_SHORT).show();
+                }else{
+                    display(".");
+                }
             }
         });
     }
 
-    void display(String stringDisplay) {
+    @SuppressLint("SetTextI18n")
+    private void display(String stringDisplay) {
+        TextView view = (TextView) getCurrentFocus();
+        view.setText(view.getText()+stringDisplay);
+    }
 
-        if (stringDisplay == "*" || stringDisplay == "+" || stringDisplay == "-" || stringDisplay == "/" || stringDisplay == "%") {
-            inputValueOperation.setText(stringDisplay);
-        } else if (inputValueOne.getText().toString().isEmpty()) {
-            inputValueOne.setText(stringDisplay);
-        } else {
-            inputValueTwo.setText(stringDisplay);
-        }
+    private void displayOperation (String string){
+        inputValueOperation.setText(string);
+        setFocus(inputValueTwo);
+    }
 
+    private void setFocus(View view){
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
     }
 }
