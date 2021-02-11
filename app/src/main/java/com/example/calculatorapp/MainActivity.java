@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Button dotButton = findViewById(R.id.dotButton);
         Button equalButton = findViewById(R.id.equalButton);
         Button clearButton = findViewById(R.id.clearButton);
+        Button eraseButton = findViewById(R.id.eraseButton);
 
         // set focus on start
 
@@ -173,7 +174,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Insert second value", Toast.LENGTH_SHORT).show();
                 } else if (inputValueOperation.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Insert operation", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if (inputValueOne.getText().toString().equals(".") || inputValueTwo.getText().toString().equals(".")){
+                    Toast.makeText(getApplicationContext(), "What should I do with two dots ?", Toast.LENGTH_SHORT).show();
+                }else {
                     new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
                 }
             }
@@ -196,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 if (inputStringValueOne.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
                 } else {
-                    int firstNumber = Integer.parseInt(inputStringValueOne);
+                    double firstNumber = Double.parseDouble(inputStringValueOne);
 
                     if (firstNumber < 0) {
                         Toast.makeText(getApplicationContext(), "Cannot extract square root from negative numbers", Toast.LENGTH_SHORT).show();
@@ -228,6 +231,19 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     display(".");
                 }
+            }
+        });
+
+        eraseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textView = (TextView) getCurrentFocus();
+                if(textView.getText().toString().length() != 0){
+                    textView.setText(textView.getText().toString().subSequence(0,textView.getText().toString().length()-1));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Nothing to erase", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
