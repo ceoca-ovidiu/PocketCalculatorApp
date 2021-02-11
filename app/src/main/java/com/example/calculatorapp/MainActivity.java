@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,17 +14,22 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView inputValue;
+    DecimalFormat numberFormat = new DecimalFormat("#.0000");
+    private TextView inputValueOne;
+    private TextView inputValueTwo;
+    private TextView inputValueOperation;
     private TextView resultDisplay;
     private String auxDisplayString;
-    DecimalFormat numberFormat = new DecimalFormat("#.0000");
+    private int result;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inputValue = findViewById(R.id.inputTextView);
+        inputValueOne = findViewById(R.id.inputOneTextView);
+        inputValueTwo = findViewById(R.id.inputTwoTextView);
+        inputValueOperation = findViewById(R.id.signTextView);
         resultDisplay = findViewById(R.id.resultTextView);
         Button zeroButton = findViewById(R.id.zeroButton);
         Button oneButton = findViewById(R.id.oneButton);
@@ -47,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
         Button dotButton = findViewById(R.id.dotButton);
         Button equalButton = findViewById(R.id.equalButton);
         Button clearButton = findViewById(R.id.clearButton);
-        inputValue.setInputType(InputType.TYPE_NULL); // hide soft keyboard
+        inputValueOne.setInputType(InputType.TYPE_NULL); // hide soft keyboard
+        inputValueTwo.setInputType(InputType.TYPE_NULL); // hide soft keyboard
+        inputValueOperation.setInputType(InputType.TYPE_NULL); // hide soft keyboard
         multiplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +64,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 display("-");
+/*                if (resultDisplay.getText().toString().isEmpty()) {
+                    result = Integer.parseInt(inputValue.getText().toString());
+                    resultDisplay.setText(String.valueOf(result));
+                    inputValue.setText("");
+                    auxDisplayString = null;
+                } else {
+                    result = result - Integer.parseInt(inputValue.getText().toString());
+                    resultDisplay.setText(String.valueOf(result));
+                    inputValue.setText("");
+                    auxDisplayString = null;
+                }*/
             }
         });
         divideButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +92,18 @@ public class MainActivity extends AppCompatActivity {
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                display("+");
+                 display("+");
+              /*  if (resultDisplay.getText().toString().isEmpty()) {
+                    result = Integer.parseInt(inputValue.getText().toString());
+                    resultDisplay.setText(String.valueOf(result));
+                    inputValue.setText("");
+                    auxDisplayString = null;
+                } else {
+                    result = result + Integer.parseInt(inputValue.getText().toString());
+                    resultDisplay.setText(String.valueOf(result));
+                    inputValue.setText("");
+                    auxDisplayString = null;
+                }*/
             }
         });
         zeroButton.setOnClickListener(new View.OnClickListener() {
@@ -142,13 +170,23 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                Calculate calculate = new Calculate(inputValue,resultDisplay);
+                if(inputValueOne.getText().toString().isEmpty()){
+                    Toast.makeText(MainActivity.this, "Insert first value" , Toast.LENGTH_SHORT).show();
+                }else if(inputValueTwo.getText().toString().isEmpty()){
+                    Toast.makeText(MainActivity.this,"Insert second value" , Toast.LENGTH_SHORT).show();
+                }else if (inputValueOperation.getText().toString().isEmpty()){
+                    Toast.makeText(MainActivity.this,"Insert operation", Toast.LENGTH_SHORT).show();
+                }else{
+                    Calculate calculate = new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
+                }
             }
         });
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputValue.setText("");
+                inputValueOne.setText("");
+                inputValueTwo.setText("");
+                inputValueOperation.setText("");
                 resultDisplay.setText("");
                 auxDisplayString = null;
             }
@@ -177,25 +215,13 @@ public class MainActivity extends AppCompatActivity {
 
     void display(String stringDisplay) {
 
-        if(auxDisplayString == null){
-            if(stringDisplay.equals("*") || stringDisplay.equals("/") || stringDisplay.equals("%")){
-                Toast.makeText(getApplicationContext(), "Please enter a number first", Toast.LENGTH_SHORT).show();
-            }else{
-                auxDisplayString = stringDisplay;
-                inputValue.setText(auxDisplayString);
-            }
+        if(stringDisplay == "*" || stringDisplay == "+" || stringDisplay == "-" || stringDisplay == "/" || stringDisplay == "%"){
+            inputValueOperation.setText(stringDisplay);
+        }else if(inputValueOne.getText().toString().isEmpty()){
+            inputValueOne.setText(stringDisplay);
         }else{
-            if(stringDisplay.equals("-") || stringDisplay.equals("+") || stringDisplay.equals("/") || stringDisplay.equals("*") || stringDisplay.equals("%")){
-                if(auxDisplayString.endsWith("-") || auxDisplayString.endsWith("+") || auxDisplayString.endsWith("/") || auxDisplayString.endsWith("*") || auxDisplayString.endsWith("%") ){
-                    Toast.makeText(getApplicationContext(), "Cannot duplicate an operation", Toast.LENGTH_SHORT).show();
-                }else{
-                    auxDisplayString = auxDisplayString + stringDisplay;
-                    inputValue.setText(auxDisplayString);
-                }
-            }else{
-                auxDisplayString = auxDisplayString + stringDisplay;
-                inputValue.setText(auxDisplayString);
-            }
+            inputValueTwo.setText(stringDisplay);
         }
+
     }
 }
