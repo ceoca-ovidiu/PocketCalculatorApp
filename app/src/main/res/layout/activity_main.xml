@@ -554,6 +554,24 @@
         app:layout_constraintEnd_toStartOf="@+id/inputOneTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/negateButton"
+        android:layout_width="79dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_button_background_orange"
+        android:text="negate"
+        android:textColor="@color/blue_palette"
+        app:layout_constraintBottom_toTopOf="@+id/piButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signTextView"
         app:layout_constraintVertical_bias="0.0" /><![CDATA[
 
 

@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Button equalButton = findViewById(R.id.equalButton);
         Button clearButton = findViewById(R.id.clearButton);
         Button eraseButton = findViewById(R.id.eraseButton);
+        Button negateButton = findViewById(R.id.negateButton);
 
 
         int orientation = getResources().getConfiguration().orientation;
@@ -308,6 +309,7 @@ public class MainActivity extends AppCompatActivity {
         minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView textView = (TextView) getCurrentFocus();
                 displayOperation("-");
             }
         });
@@ -339,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Insert second value", Toast.LENGTH_SHORT).show();
                 } else if (inputValueOperation.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Insert operation", Toast.LENGTH_SHORT).show();
-                } else if (inputValueOne.getText().toString().equals(".") || inputValueTwo.getText().toString().equals(".")) {
+                } else if (inputValueOne.getText().toString().equals(".") || inputValueTwo.getText().toString().equals(".") || inputValueTwo.getText().toString().equals("-") || inputValueOne.getText().toString().equals("-")) {
                     Toast.makeText(getApplicationContext(), "Please enter valid numbers", Toast.LENGTH_SHORT).show();
                 } else {
                     new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
@@ -414,6 +416,21 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Nothing to erase", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        negateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textView = (TextView) getCurrentFocus();
+                if(textView.getText().toString().contains("-")){
+                    textView.setText(textView.getText().subSequence(1,textView.getText().toString().length()));
+                }else if (textView.getText().toString().equals(".")){
+                    textView.setText("");
+                    textView.setText("-");
+                }else{
+                    textView.setText("-" + textView.getText().toString());
+                }
             }
         });
 
