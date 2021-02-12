@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
-                        resultDisplay.setText(numberFormat.format(firstNumber * firstNumber));
+                        resultDisplay.setText(numberFormat.format(Math.pow(firstNumber,2)));
                     }
                 }
             });
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
-                        resultDisplay.setText(numberFormat.format(firstNumber * firstNumber * firstNumber));
+                        resultDisplay.setText(numberFormat.format(Math.pow(firstNumber,3)));
                     }
                 }
             });
@@ -94,16 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     String inputStringValueOne = inputValueOne.getText().toString();
                     String inputStringValueTwo = inputValueTwo.getText().toString();
-                    double result = 1;
                     if (inputStringValueOne.isEmpty() || inputStringValueTwo.isEmpty()) {
                         Toast.makeText(getApplicationContext(), "Please enter valid numbers in the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
                         double secondNumber = Double.parseDouble(inputStringValueTwo);
-                        for (int i = 0; i < secondNumber; i++) {
-                            result = result * firstNumber;
-                        }
-                        resultDisplay.setText(numberFormat.format(result));
+                        resultDisplay.setText(numberFormat.format(Math.pow(firstNumber,secondNumber)));
                     }
                 }
             });
