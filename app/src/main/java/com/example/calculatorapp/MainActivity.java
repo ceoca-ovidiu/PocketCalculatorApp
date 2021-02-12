@@ -63,12 +63,19 @@ public class MainActivity extends AppCompatActivity {
             Button powerYButton = findViewById(R.id.powerYButton);
             Button cosButton = findViewById(R.id.cosButton);
             Button sinButton = findViewById(R.id.sinButton);
+            Button tanButton = findViewById(R.id.tanButton);
+            Button atanButton = findViewById(R.id.atanButton);
+            Button logButton = findViewById(R.id.logButton);
+            Button log10Button = findViewById(R.id.log10Button);
+            Button exponentialButton = findViewById(R.id.exponentialButton);
             powerTwoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String inputStringValueOne = inputValueOne.getText().toString();
-                    if (inputStringValueOne.isEmpty()) {
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
                         Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.pow(3.1415,2)));
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
                         resultDisplay.setText(numberFormat.format(Math.pow(firstNumber,2)));
@@ -80,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     String inputStringValueOne = inputValueOne.getText().toString();
-                    if (inputStringValueOne.isEmpty()) {
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
                         Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.pow(3.1415,3)));
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
                         resultDisplay.setText(numberFormat.format(Math.pow(firstNumber,3)));
@@ -94,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     String inputStringValueOne = inputValueOne.getText().toString();
                     String inputStringValueTwo = inputValueTwo.getText().toString();
-                    if (inputStringValueOne.isEmpty() || inputStringValueTwo.isEmpty()) {
+                    if (inputStringValueOne.isEmpty() || inputStringValueTwo.isEmpty() || inputStringValueOne.equals(".") || inputStringValueTwo.equals(".")) {
                         Toast.makeText(getApplicationContext(), "Please enter valid numbers in the fields", Toast.LENGTH_SHORT).show();
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
@@ -108,8 +117,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     String inputStringValueOne = inputValueOne.getText().toString();
-                    if (inputStringValueOne.isEmpty()) {
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
                         Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.cos(3.1415)));
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
                         resultDisplay.setText(numberFormat.format(Math.cos(firstNumber)));
@@ -121,11 +132,88 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     String inputStringValueOne = inputValueOne.getText().toString();
-                    if (inputStringValueOne.isEmpty()) {
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
                         Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.sin(3.1415)));
                     } else {
                         double firstNumber = Double.parseDouble(inputStringValueOne);
                         resultDisplay.setText(numberFormat.format(Math.sin(firstNumber)));
+                    }
+                }
+            });
+
+            tanButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.tan(3.1415)));
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.tan(firstNumber)));
+                    }
+                }
+            });
+
+            atanButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.atan(3.1415)));
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.atan(firstNumber)));
+                    }
+                }
+            });
+
+            logButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.log(3.1415)));
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.log(firstNumber)));
+                    }
+                }
+            });
+
+            log10Button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.log10(3.1415)));
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.log10(firstNumber)));
+                    }
+                }
+            });
+
+            exponentialButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty() || inputStringValueOne.equals(".")) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    }else if (inputStringValueOne.equals("PI")){
+                        resultDisplay.setText(numberFormat.format(Math.exp(3.1415)));
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.exp(firstNumber)));
                     }
                 }
             });
@@ -292,7 +380,12 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = (TextView) getCurrentFocus();
                 if (textView.getText().toString().isEmpty()) {
                     display("PI");
-                } else {
+                } else if(textView.getText().toString().equals(".")){
+
+                    inputValueOne.setText("");
+                    display("PI");
+
+                }else{
                     Toast.makeText(getApplicationContext(), "Already a number in the field", Toast.LENGTH_SHORT).show();
                 }
 
@@ -303,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextView textView = (TextView) getCurrentFocus();
                 String auxString = textView.getText().toString();
-                if (auxString.contains(".")) {
+                if (auxString.contains(".") || auxString.contains("PI")) {
                     Toast.makeText(getApplicationContext(), "Already a point in the field", Toast.LENGTH_SHORT).show();
                 } else {
                     display(".");
