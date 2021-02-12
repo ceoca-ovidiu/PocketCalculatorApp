@@ -22,11 +22,11 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dotButton"
-        app:layout_constraintStart_toEndOf="@+id/zeroButton2"
+        app:layout_constraintStart_toEndOf="@+id/sinButton"
         app:layout_constraintTop_toBottomOf="@+id/oneButton" />
 
     <Button
-        android:id="@+id/zeroButton2"
+        android:id="@+id/sinButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
@@ -35,13 +35,13 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/rounded_button_darkblue"
-        android:text="0"
+        android:text="sin"
         android:textColor="@color/icedWhite_palette"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/zeroButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oneButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/cosButton" />
 
     <Button
         android:id="@+id/oneButton"
@@ -55,24 +55,24 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/zeroButton"
         app:layout_constraintEnd_toStartOf="@+id/twoButton"
-        app:layout_constraintStart_toEndOf="@+id/oneButton2"
+        app:layout_constraintStart_toEndOf="@+id/cosButton"
         app:layout_constraintTop_toBottomOf="@+id/fourButton" />
 
     <Button
-        android:id="@+id/oneButton2"
+        android:id="@+id/cosButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_darkblue"
-        android:text="1"
+        android:text="cos"
         android:textColor="@color/icedWhite_palette"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/zeroButton2"
+        app:layout_constraintBottom_toTopOf="@+id/sinButton"
         app:layout_constraintEnd_toStartOf="@+id/oneButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fourButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/powerYButton" />
 
     <Button
         android:id="@+id/twoButton"
@@ -116,23 +116,23 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/oneButton"
         app:layout_constraintEnd_toStartOf="@+id/fiveButton"
-        app:layout_constraintStart_toEndOf="@+id/fourButton2"
+        app:layout_constraintStart_toEndOf="@+id/powerYButton"
         app:layout_constraintTop_toBottomOf="@+id/sevenButton" />
 
     <Button
-        android:id="@+id/fourButton2"
+        android:id="@+id/powerYButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_darkblue"
-        android:text="4"
+        android:text="X^Y"
         android:textColor="@color/icedWhite_palette"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/oneButton2"
+        app:layout_constraintBottom_toTopOf="@+id/cosButton"
         app:layout_constraintEnd_toStartOf="@+id/fourButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sevenButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/powerThreeButton" />
 
     <Button
         android:id="@+id/fiveButton"
@@ -176,24 +176,24 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/fourButton"
         app:layout_constraintEnd_toStartOf="@+id/eightButton"
-        app:layout_constraintStart_toEndOf="@+id/sevenButton2"
+        app:layout_constraintStart_toEndOf="@+id/powerThreeButton"
         app:layout_constraintTop_toBottomOf="@+id/piButton" />
 
     <Button
-        android:id="@+id/sevenButton2"
+        android:id="@+id/powerThreeButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/rounded_button_darkblue"
-        android:text="7"
+        android:text="x^3"
         android:textColor="@color/icedWhite_palette"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/fourButton2"
+        app:layout_constraintBottom_toTopOf="@+id/powerYButton"
         app:layout_constraintEnd_toStartOf="@+id/sevenButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/piButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/powerTwoButton" />
 
     <Button
         android:id="@+id/eightButton"
@@ -274,7 +274,7 @@
         android:id="@+id/divideButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_darkblue"
         android:text="/"
@@ -321,7 +321,7 @@
         android:id="@+id/sqrtButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_darkblue"
         android:text="√ "
@@ -336,7 +336,7 @@
         android:id="@+id/moduloButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_darkblue"
         android:text="%"
@@ -367,7 +367,7 @@
         android:id="@+id/piButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/rounded_button_darkblue"
         android:text="PI"
@@ -375,22 +375,22 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/sevenButton"
         app:layout_constraintEnd_toStartOf="@+id/sqrtButton"
-        app:layout_constraintStart_toEndOf="@+id/piButton2"
+        app:layout_constraintStart_toEndOf="@+id/powerTwoButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/piButton2"
+        android:id="@+id/powerTwoButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/rounded_button_darkblue"
-        android:text="PI"
+        android:text="X^2"
         android:textColor="@color/icedWhite_palette"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/sevenButton2"
+        app:layout_constraintBottom_toTopOf="@+id/powerThreeButton"
         app:layout_constraintEnd_toStartOf="@+id/piButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -399,7 +399,7 @@
         android:id="@+id/resultTextView"
         android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginStart="460dp"
+        android:layout_marginStart="500dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
@@ -418,7 +418,7 @@
         android:id="@+id/signTextView"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="300dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="540dp"
         android:background="@drawable/rounded_background_icedcolor"
@@ -426,6 +426,7 @@
         android:textColor="#000000"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -434,7 +435,7 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="400dp"
+        android:layout_marginEnd="300dp"
         android:background="@drawable/rounded_background_icedcolor"
         android:ems="10"
         android:gravity="center"
@@ -451,6 +452,7 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
         android:background="@drawable/rounded_background_icedcolor"
         android:ems="10"
@@ -460,15 +462,15 @@
         android:textSize="30dp"
         app:layout_constraintEnd_toStartOf="@+id/inputTwoTextView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="10dp" />
+        app:layout_constraintStart_toEndOf="@+id/eraseButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/eraseButton"
         android:layout_width="50dp"
         android:layout_height="46dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="550dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_button_background_orange"

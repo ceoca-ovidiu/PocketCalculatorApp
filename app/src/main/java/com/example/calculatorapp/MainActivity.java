@@ -1,6 +1,7 @@
 package com.example.calculatorapp;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -53,6 +54,86 @@ public class MainActivity extends AppCompatActivity {
         Button equalButton = findViewById(R.id.equalButton);
         Button clearButton = findViewById(R.id.clearButton);
         Button eraseButton = findViewById(R.id.eraseButton);
+
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Button powerTwoButton = findViewById(R.id.powerTwoButton);
+            Button powerThreeButton = findViewById(R.id.powerThreeButton);
+            Button powerYButton = findViewById(R.id.powerYButton);
+            Button cosButton = findViewById(R.id.cosButton);
+            Button sinButton = findViewById(R.id.sinButton);
+            powerTwoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(firstNumber * firstNumber));
+                    }
+                }
+            });
+
+            powerThreeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(firstNumber * firstNumber * firstNumber));
+                    }
+                }
+            });
+
+            powerYButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    String inputStringValueTwo = inputValueTwo.getText().toString();
+                    double result = 1;
+                    if (inputStringValueOne.isEmpty() || inputStringValueTwo.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please enter valid numbers in the fields", Toast.LENGTH_SHORT).show();
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        double secondNumber = Double.parseDouble(inputStringValueTwo);
+                        for (int i = 0; i < secondNumber; i++) {
+                            result = result * firstNumber;
+                        }
+                        resultDisplay.setText(numberFormat.format(result));
+                    }
+                }
+            });
+
+            cosButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.cos(firstNumber)));
+                    }
+                }
+            });
+
+            sinButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputStringValueOne = inputValueOne.getText().toString();
+                    if (inputStringValueOne.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
+                    } else {
+                        double firstNumber = Double.parseDouble(inputStringValueOne);
+                        resultDisplay.setText(numberFormat.format(Math.sin(firstNumber)));
+                    }
+                }
+            });
+        }
 
         // set focus on start
 
@@ -174,9 +255,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Insert second value", Toast.LENGTH_SHORT).show();
                 } else if (inputValueOperation.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Insert operation", Toast.LENGTH_SHORT).show();
-                } else if (inputValueOne.getText().toString().equals(".") || inputValueTwo.getText().toString().equals(".")){
+                } else if (inputValueOne.getText().toString().equals(".") || inputValueTwo.getText().toString().equals(".")) {
                     Toast.makeText(getApplicationContext(), "Please enter valid numbers", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     new Calculate(inputValueOne, inputValueTwo, inputValueOperation, resultDisplay);
                 }
             }
@@ -213,9 +294,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textView = (TextView) getCurrentFocus();
-                if(textView.getText().toString().isEmpty()){
+                if (textView.getText().toString().isEmpty()) {
                     display("PI");
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Already a number in the field", Toast.LENGTH_SHORT).show();
                 }
 
@@ -226,9 +307,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TextView textView = (TextView) getCurrentFocus();
                 String auxString = textView.getText().toString();
-                if(auxString.contains(".")){
+                if (auxString.contains(".")) {
                     Toast.makeText(getApplicationContext(), "Already a point in the field", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     display(".");
                 }
             }
@@ -238,28 +319,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textView = (TextView) getCurrentFocus();
-                if(textView.getText().toString().length() != 0){
-                    textView.setText(textView.getText().toString().subSequence(0,textView.getText().toString().length()-1));
-                }else{
+                if (textView.getText().toString().length() != 0) {
+                    textView.setText(textView.getText().toString().subSequence(0, textView.getText().toString().length() - 1));
+                } else {
                     Toast.makeText(getApplicationContext(), "Nothing to erase", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+
     }
 
     @SuppressLint("SetTextI18n")
     private void display(String stringDisplay) {
         TextView view = (TextView) getCurrentFocus();
-        view.setText(view.getText()+stringDisplay);
+        view.setText(view.getText() + stringDisplay);
     }
 
-    private void displayOperation (String string){
+    private void displayOperation(String string) {
         inputValueOperation.setText(string);
         setFocus(inputValueTwo);
     }
 
-    private void setFocus(View view){
+    private void setFocus(View view) {
         view.setFocusableInTouchMode(true);
         view.requestFocus();
     }
