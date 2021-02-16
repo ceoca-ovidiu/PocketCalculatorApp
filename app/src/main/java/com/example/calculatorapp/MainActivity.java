@@ -365,7 +365,9 @@ public class MainActivity extends AppCompatActivity {
                 String inputStringValueOne = inputValueOne.getText().toString();
                 if (inputStringValueOne.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please enter a number in the first field", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if(inputStringValueOne.equals("PI")){
+                    resultDisplay.setText(numberFormat.format(Math.sqrt(3.1415)));
+                }else {
                     double firstNumber = Double.parseDouble(inputStringValueOne);
 
                     if (firstNumber < 0) {
